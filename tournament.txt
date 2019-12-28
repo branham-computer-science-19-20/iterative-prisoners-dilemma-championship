@@ -1,37 +1,54 @@
 --------------------------------------------------------------------------------
 Section 0 - Line up
 --------------------------------------------------------------------------------
-Player 0 (P0): E0, Collude
-        Always collude.
-Player 1 (P1): E1, Betray
-        Always betray.
-Player 2 (P2): E2, Alternate
-        Collude, then alternate.
-Player 3 (P3): E3, Collude but retaliate
-        Collude first round. Collude, except in a round after getting 
-        a severe punishment.
+Player 0 (P0):  Team 5 Mr.Turner, The name the team gives to this strategy
+        How does this strategy decide?
+Player 1 (P1): C.L.A.S.S., The name the team gives to this strategy
+        How does this strategy decide?
+Player 2 (P2): We luv Mostafa, The name the team gives to this strategy
+        How does this strategy decide?
+Player 3 (P3): Okonkwo, look at history and decide based on it
+        find the most common used after 50 trials and choose option based on tha
+        t and if it is not the needed output there will be another section which
+         chooses the output based on previous code
+Player 4 (P4): 3/4 Asian, Basic Bois
+        How does this strategy decide?
+Player 5 (P5): The name the team gives to itself, The name the team gives to this strategy
+        How does this strategy decide?
+Player 6 (P6): Team India, The name the team gives to this strategy
+        How does this strategy decide?
+Player 7 (P7): ponyjar, The name the team gives to this strategy
+        How does this strategy decide?
 --------------------------------------------------------------------------------
 Section 1 - Player vs. Player
 --------------------------------------------------------------------------------
 Each column shows pts/round earned against each other player:
-             P0     P1     P2     P3
-vs. P0 :      0    100     50      0
-vs. P1 :   -500      0   -376   -376
-vs. P2 :   -250    -75      0   -201
-vs. P3 :      0    -74   -197      0
-TOTAL  :   -750    -49   -523   -577
+             P0     P1     P2     P3     P4     P5     P6     P7
+vs. P0 :      0   -131   -363   -204   -295   -248   -240   -245
+vs. P1 :     26      0    100      0      0      0      0      0
+vs. P2 :      0   -500      0   -217   -234   -147    -21   -195
+vs. P3 :     23      0   -107      0      0     -2      0      0
+vs. P4 :    -80      0   -110      0      0   -199      0      0
+vs. P5 :   -248     -4   -147     -6   -199      0   -245     -3
+vs. P6 :   -253      0   -330      0      0   -245      0      0
+vs. P7 :    -99      0   -173      0      0      0      0      0
+TOTAL  :   -631   -635  -1130   -427   -728   -841   -506   -443
 --------------------------------------------------------------------------------
 Section 2 - Leaderboard
 --------------------------------------------------------------------------------
 Average points per round:
 Team name (P#):  Score      with strategy name
-E1        (P1):        -13 points with Betray                                  
-E2        (P2):       -131 points with Alternate                               
-E3        (P3):       -145 points with Collude but retaliate                   
-E0        (P0):       -188 points with Collude                                 
+Okonkwo   (P3):        -54 points with look at history and decide based on it  
+ponyjar   (P7):        -56 points with The name the team gives to this strategy
+Team India(P6):        -64 points with The name the team gives to this strategy
+ Team 5 Mr(P0):        -79 points with The name the team gives to this strategy
+C.L.A.S.S.(P1):        -80 points with The name the team gives to this strategy
+3/4 Asian (P4):        -91 points with Basic Bois                              
+The name t(P5):       -106 points with The name the team gives to this strategy
+We luv Mos(P2):       -142 points with The name the team gives to this strategy
 --------------------------------------------------------------------------------
 --------------------------------------------------------------------------------
-example0--------------------------------------------------------------------------------
+team1--------------------------------------------------------------------------------
 ####
 # Each team's file must define four tokens:
 #     team_name: a string
@@ -40,25 +57,145 @@ example0------------------------------------------------------------------------
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'E0'
-strategy_name = 'Collude'
-strategy_description = 'Always collude.'
+team_name = ' Team 5 Mr.Turner' # Only 10 chars displayed.
+strategy_name = 'The name the team gives to this strategy'
+strategy_description = 'How does this strategy decide?'
     
 def move(my_history, their_history, my_score, their_score):
-    '''Make my move based on the history with this player.
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
     
-    history: a string with one letter (c or b) per round that has been played with this opponent.
-    their_history: a string of the same length as history, possibly empty. 
-    The first round between these two players is my_history[0] and their_history[0]
-    The most recent round is my_history[-1] and their_history[-1]
-    
-    Returns 'c' or 'b' for collude or betray.
+    Make my move.
+    Returns 'c' or 'b'. 
     '''
     
-    # This player always colludes.
-    return 'c'
-    --------------------------------------------------------------------------------
-example1--------------------------------------------------------------------------------
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+
+    
+    
+    
+    match = len(my_history) # Counts the number of matcheds that have occured based off how many rounds are shown in the history.
+    
+    if len(my_history) == 0: # If the game has just begun, then betray.
+        return 'b'
+    while match >= 1 and match <= 23: # From matches 1 to 23...
+
+        if their_history[-1] == 'b': # If your partner betrayed last round then betray.
+            return 'b'
+        elif their_history[-1] == 'c': # If your partner colluded last round then collude.
+            return 'c'
+
+    while match >23 and match <= 27 : # From matches 24 to 27...
+
+        if their_history[-1] == 'b': # If your partner betrayed last round then collude.
+            return 'c'
+        elif their_history[-1] == 'c': # If your partner colluded last round then betray.
+            return 'b'
+
+    while match >27 and match <= 53: # From matches 28 to 53...
+        
+        if their_history[-1] == 'b' and their_history[-2] == 'b': # If your partner betrayed last round and the round before that then betray.
+            return 'b'
+        elif their_history[-1] == 'c': # If your partner colluded last round the also collude.
+            return 'c'
+        if my_score <= -250: # If your score is -250 or less...
+            
+            if their_score >= -250: # If your partner's score is greater than -250 then betray.
+                return 'b'
+            elif my_history[-1] == 'c': # If you colluded last round then collude.
+                return 'c'
+            elif my_history[-1] == 'b': # If you betrayed last round then betray again.
+                return 'b'
+                
+        elif their_score >= 100: # If their score is greater than 100, or is 100, then collude.
+            return 'c'
+        else: # Otherwise betray.
+            return 'b'
+            
+    while match >53 and match <=72: # From match 54 to match 72...
+
+        if their_history[-1] == 'b' and their_history[-2] == 'c': # If they betrayed last round and colluded before that then betray.
+            return 'b'
+        elif their_history[-1] == 'c' and their_history[-3] == 'b': # If they colluded last round and betrayed two rounds before that then betray.
+            return 'b'
+        else: # Otherwise betray.
+            return 'b'
+            
+    while match >72 and match <=91: # From match 73 to match 91...
+           
+        if their_history[-3] =='c' and my_history[-3] == 'b': # If they colluded three rounds ago and you betrayed three rounds ago then betray.
+            return 'b'
+        elif their_history[-3] == 'b' and my_history[-3] == 'c' : # If they betrayed three rounds ago and you colluded three rounds ago then collude.
+            return 'c'
+        else: # Otherwise betray.
+            return 'b'
+    
+    while match >92 and match <=95: # From match 93 to match 95...
+        
+        if my_score <= -400: # If their score is less than or equal to -400 betray.
+            return 'b' 
+        elif my_score >= 300: # If my score is greater than or equal to 300 collude.
+            return 'c'
+        else: # Otherwise betray.
+            return 'b'
+            
+    if my_score <= -600 and their_score >= -100: # If your score is less than or equal to -600 and their score is greater than or equal to -100 then betray.
+        return 'b'
+    elif their_score <= -600 and my_score >= 0 : # If their score is less than or equal to -600 and my score is greater than or equal to 0 then betray.
+        return 'c' 
+    else: # Otherwise betray.
+        return 'b'
+        
+
+    
+    
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team2--------------------------------------------------------------------------------
+
 ####
 # Each team's file must define four tokens:
 #     team_name: a string
@@ -67,54 +204,339 @@ example1------------------------------------------------------------------------
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'E1'
-strategy_name = 'Betray'
-strategy_description = 'Always betray.'
-    
-def move(my_history, their_history, my_score, their_score):
-    '''Make my move based on the history with this player.
-    
-    history: a string with one letter (c or b) per round that has been played with this opponent.
-    their_history: a string of the same length as history, possibly empty. 
-    The first round between these two players is my_history[0] and their_history[0]
-    The most recent round is my_history[-1] and their_history[-1]
-    
-    Returns 'c' or 'b' for collude or betray.
-    '''
-    
-    #This example player always betrays.      
-    return 'b'
---------------------------------------------------------------------------------
-example2--------------------------------------------------------------------------------
-####
-# Each team's file must define four tokens:
-#     team_name: a string
-#     strategy_name: a string
-#     strategy_description: a string
-#     move: A function that returns 'c' or 'b'
-####
+team_name = 'C.L.A.S.S.' # Only 10 chars displayed.
+strategy_name = 'The name the team gives to this strategy'
+strategy_description = 'How does this strategy decide?'
 
-team_name = 'E2'
-strategy_name = 'Alternate'
-strategy_description = 'Collude, then alternate.'
-    
-def move(my_history, their_history, my_score, their_score):
-    '''Make my move based on the history with this player.
-    
-    history: a string with one letter (c or b) per round that has been played with this opponent.
-    their_history: a string of the same length as history, possibly empty. 
-    The first round between these two players is my_history[0] and their_history[0]
-    The most recent round is my_history[-1] and their_history[-1]
-    
-    Returns 'c' or 'b' for collude or betray.
-    '''
-    # This player colludes on even numbered rounds (first round is round #0).
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#SAMARTH'S CODE:
+'''def move(my_history, their_history, my_score, their_score):
+    if len(their_history) >= 1 and their_history[-3] == 'c':
+        return 'b'  #If they have colluded for the last three turns then take advantage and betray them
+    if len(their_history) >= 1 and their_history[-1] == 'c':
+        return 'c'  #If they collude last then collude
+    elif len(their_history) >= 1 and their_history[-1] == 'b':
+        return 'b'  #If their last turn is betrayal then betray
+    else:
+        return 'c' '''
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+#AUDREY'S CODE: 
+'''def move(my_history, their_history, my_score, their_score) :
+    if len(my_history)==0: #this will make it start off with colluding
+        return 'c'
+    elif len(my_history) >= 1 and my_history[-1]=='c' and their_history[-1]=='b':
+        return 'b'
+    elif len(my_history) >= 5 and (my_history[-5]) == 'b' and (my_history[-4]) and (my_history[-3]) and (my_history[-2]) and (my_history[-1]): #if my last 5 moves were d, collude
+        return 'c'
+    elif my_history == 25 and my_score < 100:
+        return 'b'
+    else:
+        return 'c' '''
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------     
+#LIPITHA'S CODE:
+'''def move(my_history, their_history, my_score, their_score):
+    if len(my_history)==0: # It's the first round; betray.
+        return 'c'
+    else:
+        return 'b' #Else Betray '''
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------          
+#SAMENTHA'S CODE:
+'''def move(my_history, their_history, my_score, their_score):
     if len(my_history)%2 == 0:
+        return 'b'
+    else:
+        return 'c'  '''
+#-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------          
+#CAITLYN'S CODE:
+def move(my_history, their_history, my_score, their_score):
+    def total_b(their_history):
+        total_b = 0
+        for turn in their_history:
+            if turn == 'b':
+                print 'was b'
+                total_b += 1
+        percentage = total_b/len(their_history)
+        return percentage
+        if total_b(their_history) > 0.5:
+            return 'b'
+    def betray_afterbetrayal(my_history, their_history, my_score, their_score):
+        if len(my_history) == 0:
+            return 'c'
+        elif my_history[-1] == 'c' and their_history[-1] == 'b':
+            return 'b'
+        else:
+            return 'c'  
+
+    
+    
+    
+    
+    
+    
+    
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    return 'c'
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')    
+              
+
+--------------------------------------------------------------------------------
+team3--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'We luv Mostafa' # Only 10 chars displayed.
+strategy_name = 'The name the team gives to this strategy'
+strategy_description = 'How does this strategy decide?'
+    
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+    #Scenario 1: when I am betrayed 3 times in a row return a collude, else continue betraying
+    
+    if len(their_history) >= 3 and their_history[-3] == 'b': #when they have more than 3 choices and B is chosen 3 times in a row
+        len(their_history) <= int(3)
+        return 'c' #return a collude
+    else:
+        return 'b' #if not, return a betray
+        
+    #Scenario 2: 
+    if my_score < 0: #if my score goes under 0
+        return 'b'  #then betray
+    else:   #if it isn't under 0
+        return 'c' # then collude
+        
+    #Scenario 3:
+    if len(my_history)==0:# when we start the game, collude first
+       return 'c'
+    else: # after the start, betray all the time
+       return 'b'
+       
+    #Scenario 4:
+    if len(my_history) == 0:
+        return 'c'
+        #this makes us return will collude on our very first turn
+    else:
+        recent_round_them = their_history[-1]
+        recent_round_me = my_history[-1]
+        for round in range(len(my_history)-1):
+            prior_round_them = their_history[round]
+            prior_round_me = my_history[round]
+            if (prior_round_me == recent_round_me) and (prior_round_them == recent_round_them):
+                return their_history[round]
+        #this references both team's previous turns
+        if their_history[-1] == 'b':
+            return 'b'
+            #returns betray if the other team's last turn was betray
+        else:
+            return 'c'
+            #returns collude if the team's last turn wasn't betray
+            
+    #Scenario 5:
+    
+    if len(my_history) == 0: # when the game starts, betray
+        return 'b'
+    elif 'bbbbb' in my_history:    # if whenever we betrayed 5 times in a row, collude
+        return 'c'
+    else:                                     # otherwise, betray
+        return 'b'
+
+
+
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             --------------------------------------------------------------------------------
+team4--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Okonkwo' # Only 10 chars displayed.
+strategy_name = 'look at history and decide based on it'
+strategy_description = 'find the most common used after 50 trials and choose option based on that and if it is not the needed output there will be another section which chooses the output based on previous code'
+
+import random
+def move(my_history, their_history, my_score, their_score):  #defines the various moves
+    z = ['b','b','c','b']   #sets z to be betray, betray, collude, collude
+    word_list = [their_history[i:i+1] for i in range(0, len(their_history))] #sets word list
+    word_counter = {}
+    for word in word_list: #
+        if word in word_counter:  #if word is in the word counter
+            word_counter[word] += 1 #set word counter to be word_coutner = word = 1
+        else:
+            word_counter[word] = 1  #sets the word to 1
+    popular_words = sorted(word_counter, key = word_counter.get, reverse = True) #
+    top_1 = popular_words[:1]
+    if len(my_history) >= 50 and top_1 == ['c']: #
+        return 'c'
+    else:
+        if len(my_history) >= 1 and their_history[-1] == 'b': #alternatively, if my_history is greater than or equal to 1 AND their previous history is betray
+            return z[random.randint(0,2)]
+        if len(my_history) >= 1 and their_history[-1] == 'c': #if they have a number of colludes in their history one turn ago, reutn c
+            return 'c'
+    if len(my_history)==0: #return collude if my_history is 0
+        return 'c'
+--------------------------------------------------------------------------------
+team5--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = '3/4 Asian' # Only 10 chars displayed.
+#Trent, Kemuel, Rashaun, Clark
+strategy_name = 'Basic Bois'
+strategy_description = 'How does this strategy decide?'
+
+def move(my_history, their_history, my_score, their_score):
+    """ Alternate 'C' and 'D' """
+    if my_history[-1] == 'C':
+        return 'D'
+    else:
+        return 'C'
+
+def move(my_history, their_history, my_score, their_score):
+    #Scenario #1: First Turn Collude
+    if len(my_history)==0: #It's the first round; collude.
+        return 'c'
+    elif my_history[-1]=='c' and their_history[-1]=='b': #If my history is c and their history is b, then return b.
+        return 'b'
+    else:
+        return 'c' #Otherwise return b.
+    #Scenario #2: First Turn Betray
+    if len(my_history)==0: #It's the first round; betray.
+        return 'b'
+    elif my_history[-1]=='b' and their_history[-1]=='c': #If my history is b and their history is c, then return c.
+        return 'c'
+    else:
+        return 'b' #Otherwise return b.
+    #Scenario #3:  If previous turn was c, then return b if score is -1.
+    """ Alternate 'c' and 'b' """
+    if my_history[-1] == 'c':
+        return 'b'
+    else:
+        return 'c'
+    #Scenario #4: If previous turn was b, then return b if score is -1.
+    """ Alternate 'c' and 'b' """
+    if my_history[-1] == 'b':
         return 'c'
     else:
         return 'b'
-    --------------------------------------------------------------------------------
-example3--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+team6--------------------------------------------------------------------------------
 ####
 # Each team's file must define four tokens:
 #     team_name: a string
@@ -123,53 +545,366 @@ example3------------------------------------------------------------------------
 #     move: A function that returns 'c' or 'b'
 ####
 
-team_name = 'E3'
-strategy_name = 'Collude but retaliate'
-strategy_description = '''\
-Collude first round. Collude, except in a round after getting 
-a severe punishment.'''
+team_name = 'The name the team gives to itself' # Only 10 chars displayed.
+strategy_name = 'The name the team gives to this strategy'
+strategy_description = 'How does this strategy decide?'
     
 def move(my_history, their_history, my_score, their_score):
-    '''Make my move based on the history with this player.
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
     
-    history: a string with one letter (c or b) per round that has been played with this opponent.
-    their_history: a string of the same length as history, possibly empty. 
-    The first round between these two players is my_history[0] and their_history[0]
-    The most recent round is my_history[-1] and their_history[-1]
-    
-    Returns 'c' or 'b' for collude or betray.
+    Make my move.
+    Returns 'c' or 'b'. 
     '''
-    if len(my_history)==0: # It's the first round; collude.
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] andef move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+    
+    Make my move.
+    Returns 'c' or 'b'. 
+    '''
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty. 
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+    if len(my_history) == 0 :
         return 'c'
-    elif my_history[-1]=='c' and their_history[-1]=='b':
-        return 'b' # Betray if they were severely punished last time,
+    elif my_score > their_score:
+        return 'c'
     else:
-        return 'c' # otherwise collude.--------------------------------------------------------------------------------
-Section 3 - Game Data for Team E0
+        return 'b'
+    #scenarios 1-3
+    
+   
+ 
+    
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    
+  
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             
 --------------------------------------------------------------------------------
--500 pt/round: E0(P0) "Collude"
-100 pt/round: E1(P1) "Betray"
+team7--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = 'Team India' # Only 10 chars displayed.
+
+
+# Sanjith Iype, Gautam Nair, Vaihbhav Gokhale, Yuva Krishnapilllai
+
+strategy_name = 'The name the team gives to this strategy'
+strategy_description = 'How does this strategy decide?'
+
+def move(my_history, their_history, my_score, their_score):
+    ''' Arguments accepted: my_history, their_history are strings.
+    my_score, their_score are ints.
+
+    Make my move.
+    Returns 'c' or 'b'.
+    '''
+
+
+    # my_history: a string with one letter (c or b) per round that has been played with this opponent.
+    # their_history: a string of the same length as history, possibly empty.
+    # The first round between these two players is my_history[0] and their_history[0].
+    # The most recent round is my_history[-1] and their_history[-1].
+
+    # Analyze my_history and their_history and/or my_score and their_score.
+    # Decide whether to return 'c' or 'b'.
+    turns_value=len(my_history)
+
+    # This is our first scenario that acts on the first turn. It starts on betray the first turn.
+    if len(my_history) == 0:
+        return 'c'
+
+    #  This is our second scenario that acts if we are losing after 20 turns. It will always return betray if we lose after 20 turns.
+    elif turns_value >= 80 and my_score < their_score:
+        return 'b'
+
+    #  This is our third scenario that acts if our score is at or below -2000.  If we are below -2000, we always return betray.
+    elif  my_score <= -2000:
+        return 'b'
+
+    #  This is our fourth scenario that acts if all the other scenarios don't work. It returns their answer like an "uno reverse card".
+    else:
+	     return their_history[-1]
+
+
+
+
+
+
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='',
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc',
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0,
+              their_score=0,
+              result='b')
+--------------------------------------------------------------------------------
+team8--------------------------------------------------------------------------------
+####
+# Each team's file must define four tokens:
+#     team_name: a string
+#     strategy_name: a string
+#     strategy_description: a string
+#     move: A function that returns 'c' or 'b'
+####
+
+team_name = "ponyjar"
+# Only 10 chars displayed.
+# Andrei Ivanou, Rylen Medina, Ethan Peglow, Oleksandr Gorpynich
+strategy_name = 'The name the team gives to this strategy'
+strategy_description = 'How does this strategy decide?'
+    
+def move(my_history, their_history, my_score, their_score):
+    #if it is the first or second move return c
+    if len(my_history) == 0 or len(my_history) == 1:
+        return "c"
+    #if it is the potential last move return b
+    elif len(my_history) == 299:
+        return "b"
+    #all next move require going back so we check if the length of history is sufficient
+    elif len(my_history) > 3:
+        #if we went b twice then go c
+        if my_history[-1] == "b" and my_history[-2] == "b":
+            return "c"
+        #if they went b and we c then go b
+        elif their_history[-1] == "b" and my_history[-1] == "c":
+            return "b"
+        #if we both went b then return b
+        elif their_history[-1] == "b" and my_history[-1] == "b":
+            return "b"
+    #If none of these are true then return c
+    return "c"
+
+    
+def test_move(my_history, their_history, my_score, their_score, result):
+    '''calls move(my_history, their_history, my_score, their_score)
+    from this module. Prints error if return value != result.
+    Returns True or False, dpending on whether result was as expected.
+    '''
+    real_result = move(my_history, their_history, my_score, their_score)
+    if real_result == result:
+        return True
+    else:
+        print("move(" +
+            ", ".join(["'"+my_history+"'", "'"+their_history+"'",
+                       str(my_score), str(their_score)])+
+            ") returned " + "'" + real_result + "'" +
+            " and should have returned '" + result + "'")
+        return False
+
+if __name__ == '__main__':
+     
+    # Test 1: Betray on first move.
+    if test_move(my_history='',
+              their_history='', 
+              my_score=0,
+              their_score=0,
+              result='b'):
+         print 'Test passed'
+     # Test 2: Continue betraying if they collude despite being betrayed.
+    test_move(my_history='bbb',
+              their_history='ccc', 
+              # Note the scores are for testing move().
+              # The history and scores don't need to match unless
+              # that is relevant to the test of move(). Here,
+              # the simulation (if working correctly) would have awarded 
+              # 300 to me and -750 to them. This test will pass if and only if
+              # move('bbb', 'ccc', 0, 0) returns 'b'.
+              my_score=0, 
+              their_score=0,
+              result='b')             
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team  Team 5 Mr.Turner
+--------------------------------------------------------------------------------
+26 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+-131 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+BCCCCCCCCCCCCCCCCCCCCCCCBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBB
+cCCCCCCCCCCCCCCCCCCCCCCCccccCCCCCCCCCCCCCCCCCCCCCCCCCCcccccccccccccccccccccccccc
+
+BBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+ccccccccccccCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCC
+CCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+-363 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+bbbBCCCcbbbBCCCcbbbBCCCcccccbbbBCCCccbbbBCCCccbbbBCCCcbbbBBBBBBBBBBBBBBBBBBBBBBB
+bbbcCCCBbbbcCCCBbbbcCCCBBBBBbbbcCCCBBbbbcCCCBBbbbcCCCBbbbccccccccccccccccccccccc
+
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+
+BBBBCCC
+ccccCCC
+
+--------------------------------------------------------------------------------
+23 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+-204 pt/round: Okonkwo(P3) "look at history and decide based on it"
+BcBcBCCCCCCCCCCCCCCCCCCCBbcCCCCCCCCCCCCCCCCCCCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBB
+cBcBcCCCCCCCCCCCCCCCCCCCcbBCCCCCCCCCCCCCCCCCCCCCCCCCCCcccccccccccccccccccccccccc
+
+BBBBBBBBBBBBCCCCCCCCCCC
+ccccccccccccCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-80 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+-295 pt/round: 3/4 Asian(P4) "Basic Bois"
+BcBcBcBcBcBcBcBcBcBcBcBcCBbCCCCCCCCCCCCCCCCCCCCCCCCCCCBbBbBbBbBbBbBbBbBbBbBbBbBb
+cBcBcBcBcBcBcBcBcBcBcBcBCcbCCCCCCCCCCCCCCCCCCCCCCCCCCCcbcbcbcbcbcbcbcbcbcbcbcbcb
+
+BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb
+cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb
+
+BbBbBbBbBbBbBbBbBbBbB
+cbcbcbcbcbcbcbcbcbcbc
+
+--------------------------------------------------------------------------------
+-248 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+-248 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+BcbbbbbbbbbbbbbbbbbbbbbbcCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBbbbbbbbbbbbbbbbbbbbbbbBCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-253 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+-240 pt/round: Team India(P6) "The name the team gives to this strategy"
+BcBcBcBcBcbbbbbbbbbbbbbbccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cBcBcBcBcBbbbbbbbbbbbbbbBBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+-99 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+-245 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+BCCCCCCCCCCCCCCCCCCCCCCCBbcCCCCCCCCCCCCCCCCCCCCCCCCCCCBbbBbbBbbBbbBbbBbbBbbBbbBb
+cCCCCCCCCCCCCCCCCCCCCCCCcbBCCCCCCCCCCCCCCCCCCCCCCCCCCCcbbcbbcbbcbbcbbcbbcbbcbbcb
+
+bBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbB
+bcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbc
+
+bbBbbBbbBbbBbbBbbBbbBbbBbbBbb
+bbcbbcbbcbbcbbcbbcbbcbbcbbcbb
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team C.L.A.S.S.
+--------------------------------------------------------------------------------
+-131 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+26 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+cCCCCCCCCCCCCCCCCCCCCCCCccccCCCCCCCCCCCCCCCCCCCCCCCCCCcccccccccccccccccccccccccc
+BCCCCCCCCCCCCCCCCCCCCCCCBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+ccccccccccccCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+BBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCC
+CCCCC
+
+--------------------------------------------------------------------------------
+-500 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+100 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 
 --------------------------------------------------------------------------------
--250 pt/round: E0(P0) "Collude"
-50 pt/round: E2(P2) "Alternate"
-CcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCc
-CBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCB
-
-CcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCc
-CBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCB
-
-CcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCc
-CBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCB
-
---------------------------------------------------------------------------------
-0 pt/round: E0(P0) "Collude"
-0 pt/round: E3(P3) "Collude but retaliate"
+0 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+0 pt/round: Okonkwo(P3) "look at history and decide based on it"
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
@@ -177,108 +912,489 @@ CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
 --------------------------------------------------------------------------------
+0 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+0 pt/round: 3/4 Asian(P4) "Basic Bois"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
 --------------------------------------------------------------------------------
-Section 3 - Game Data for Team E1
+-4 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+0 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+CcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
 --------------------------------------------------------------------------------
-100 pt/round: E1(P1) "Betray"
--500 pt/round: E0(P0) "Collude"
+0 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+0 pt/round: Team India(P6) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+0 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team We luv Mostafa
+--------------------------------------------------------------------------------
+-363 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+0 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+bbbcCCCBbbbcCCCBbbbcCCCBBBBBbbbcCCCBBbbbcCCCBBbbbcCCCBbbbccccccccccccccccccccccc
+bbbBCCCcbbbBCCCcbbbBCCCcccccbbbBCCCccbbbBCCCccbbbBCCCcbbbBBBBBBBBBBBBBBBBBBBBBBB
+
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+ccccCCC
+BBBBCCC
+
+--------------------------------------------------------------------------------
+100 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+-500 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
 BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
 cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
-BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
-cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccc
 
 --------------------------------------------------------------------------------
--75 pt/round: E1(P1) "Betray"
--376 pt/round: E2(P2) "Alternate"
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb
+-107 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+-217 pt/round: Okonkwo(P3) "look at history and decide based on it"
+BbbbCCCBbbbcCCCBbbbcCCCBbbBcCBCBbbbcCCCBbbbcCCCBbbBcCBCBbBbcBCCBBbbBcCBCBbbbCCCB
+cbbbCCCcbbbBCCCcbbbBCCCcbbcBCcCcbbbBCCCcbbbBCCCcbbcBCcCcbcbBcCCccbbcBCcCcbbbCCCc
+
+bBBcBbcBcCBCBBbbBcCBCBBbbbcCCCBbbBCCBBBBbbbCCCBbBbcBCCBbBbcBcCBcBbcBCCBbBbcBcCBc
+bccBcbBcBCcCccbbcBCcCccbbbBCCCcbbcCCccccbbbCCCcbcbBcCCcbcbBcBCcBcbBcCCcbcbBcBCcB
+
+BBcBBcBbcBcCBcBbcBCCBbBbcBcCBCB
+ccBccBcbBcBCcBcbBcCCcbcbBcBCcCc
+
+--------------------------------------------------------------------------------
+-110 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+-234 pt/round: 3/4 Asian(P4) "Basic Bois"
+BbBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbC
+cbcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbC
+
+BcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbC
+cBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbC
+
+BcBbCBcBbCBcBbCBcBbCBcBb
+cBcbCcBcbCcBcbCcBcbCcBcb
+
+--------------------------------------------------------------------------------
+-147 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+-147 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+BbbbccCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCC
+cbbbBBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCC
+
+CBbbbcCCCBbbbcCCCBbbbcCCCBbb
+CcbbbBCCCcbbbBCCCcbbbBCCCcbb
+
+--------------------------------------------------------------------------------
+-330 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+-21 pt/round: Team India(P6) "The name the team gives to this strategy"
+BbbbcCCCBbbbcccccCCCBbbbccccccccccccCCCBbbbcccccccccccccCCCBbbbccccccccccccCCCBb
+cbbbBCCCcbbbBBBBBCCCcbbbBBBBBBBBBBBBCCCcbbbBBBBBBBBBBBBBCCCcbbbBBBBBBBBBBBBCCCcb
+
+bbcccccccccccccCCCBbbbccccccccccccCCCBbbbcccccccccccccCCCBbb
+bbBBBBBBBBBBBBBCCCcbbbBBBBBBBBBBBBCCCcbbbBBBBBBBBBBBBBCCCcbb
+
+--------------------------------------------------------------------------------
+-173 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+-195 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+BBBBbbBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBc
+ccccbbcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcB
+
+CBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBc
+CcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcB
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Okonkwo
+--------------------------------------------------------------------------------
+-204 pt/round: Okonkwo(P3) "look at history and decide based on it"
+23 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+cBcBcCCCCCCCCCCCCCCCCCCCcbBCCCCCCCCCCCCCCCCCCCCCCCCCCCcccccccccccccccccccccccccc
+BcBcBCCCCCCCCCCCCCCCCCCCBbcCCCCCCCCCCCCCCCCCCCCCCCCCCCBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+ccccccccccccCCCCCCCCCCC
+BBBBBBBBBBBBCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: Okonkwo(P3) "look at history and decide based on it"
+0 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-217 pt/round: Okonkwo(P3) "look at history and decide based on it"
+-107 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+cbbbCCCcbbbBCCCcbbbBCCCcbbcBCcCcbbbBCCCcbbbBCCCcbbcBCcCcbcbBcCCccbbcBCcCcbbbCCCc
+BbbbCCCBbbbcCCCBbbbcCCCBbbBcCBCBbbbcCCCBbbbcCCCBbbBcCBCBbBbcBCCBBbbBcCBCBbbbCCCB
+
+bccBcbBcBCcCccbbcBCcCccbbbBCCCcbbcCCccccbbbCCCcbcbBcCCcbcbBcBCcBcbBcCCcbcbBcBCcB
+bBBcBbcBcCBCBBbbBcCBCBBbbbcCCCBbbBCCBBBBbbbCCCBbBbcBCCBbBbcBcCBcBbcBCCBbBbcBcCBc
+
+ccBccBcbBcBCcBcbBcCCcbcbBcBCcCc
+BBcBBcBbcBcCBcBbcBCCBbBbcBcCBCB
+
+--------------------------------------------------------------------------------
+0 pt/round: Okonkwo(P3) "look at history and decide based on it"
+0 pt/round: 3/4 Asian(P4) "Basic Bois"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-6 pt/round: Okonkwo(P3) "look at history and decide based on it"
+-2 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+CcBcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CBcBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: Okonkwo(P3) "look at history and decide based on it"
+0 pt/round: Team India(P6) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: Okonkwo(P3) "look at history and decide based on it"
+0 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team 3/4 Asian
+--------------------------------------------------------------------------------
+-295 pt/round: 3/4 Asian(P4) "Basic Bois"
+-80 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+cBcBcBcBcBcBcBcBcBcBcBcBCcbCCCCCCCCCCCCCCCCCCCCCCCCCCCcbcbcbcbcbcbcbcbcbcbcbcbcb
+BcBcBcBcBcBcBcBcBcBcBcBcCBbCCCCCCCCCCCCCCCCCCCCCCCCCCCBbBbBbBbBbBbBbBbBbBbBbBbBb
+
 cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb
-
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb
-
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbB
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc
-
---------------------------------------------------------------------------------
--74 pt/round: E1(P1) "Betray"
--376 pt/round: E3(P3) "Collude but retaliate"
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb
-
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbB
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc
-
---------------------------------------------------------------------------------
---------------------------------------------------------------------------------
-Section 3 - Game Data for Team E2
---------------------------------------------------------------------------------
-50 pt/round: E2(P2) "Alternate"
--250 pt/round: E0(P0) "Collude"
-CBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCB
-CcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCc
-
-CBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCB
-CcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCc
-
-CBCBCBCBCBCBCBCBCBCBCBCBCBCBCBCB
-CcCcCcCcCcCcCcCcCcCcCcCcCcCcCcCc
-
---------------------------------------------------------------------------------
--376 pt/round: E2(P2) "Alternate"
--75 pt/round: E1(P1) "Betray"
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb
 BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb
 
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb
-
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbB
+cbcbcbcbcbcbcbcbcbcbc
+BbBbBbBbBbBbBbBbBbBbB
 
 --------------------------------------------------------------------------------
--197 pt/round: E2(P2) "Alternate"
--201 pt/round: E3(P3) "Collude but retaliate"
+0 pt/round: 3/4 Asian(P4) "Basic Bois"
+0 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-234 pt/round: 3/4 Asian(P4) "Basic Bois"
+-110 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+cbcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbC
+BbBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbC
+
+cBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbCcBcbC
+BcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbCBcBbC
+
+cBcbCcBcbCcBcbCcBcbCcBcb
+BcBbCBcBbCBcBbCBcBbCBcBb
+
+--------------------------------------------------------------------------------
+0 pt/round: 3/4 Asian(P4) "Basic Bois"
+0 pt/round: Okonkwo(P3) "look at history and decide based on it"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-199 pt/round: 3/4 Asian(P4) "Basic Bois"
+-199 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+CcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
+CBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
+
+BcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
+cBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
+
+--------------------------------------------------------------------------------
+0 pt/round: 3/4 Asian(P4) "Basic Bois"
+0 pt/round: Team India(P6) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: 3/4 Asian(P4) "Basic Bois"
+0 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team The name the team gives to itself
+--------------------------------------------------------------------------------
+-248 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+-248 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+cBbbbbbbbbbbbbbbbbbbbbbbBCcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BcbbbbbbbbbbbbbbbbbbbbbbcCBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+-4 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+CBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-147 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+-147 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+cbbbBBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCCCcbbbBCC
+BbbbccCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCCCBbbbcCC
+
+CcbbbBCCCcbbbBCCCcbbbBCCCcbb
+CBbbbcCCCBbbbcCCCBbbbcCCCBbb
+
+--------------------------------------------------------------------------------
+-2 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+-6 pt/round: Okonkwo(P3) "look at history and decide based on it"
+CBcBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CcBcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-199 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+-199 pt/round: 3/4 Asian(P4) "Basic Bois"
 CBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
 CcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
 
-cBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
-BcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
-
-cBcBcB
-BcBcBc
+cBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
+BcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
 
 --------------------------------------------------------------------------------
+-245 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+-245 pt/round: Team India(P6) "The name the team gives to this strategy"
+CBcBcBcBcBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CcBcBcBcBcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
 --------------------------------------------------------------------------------
-Section 3 - Game Data for Team E3
+0 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+-3 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+CBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
 --------------------------------------------------------------------------------
-0 pt/round: E3(P3) "Collude but retaliate"
-0 pt/round: E0(P0) "Collude"
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team Team India
+--------------------------------------------------------------------------------
+-240 pt/round: Team India(P6) "The name the team gives to this strategy"
+-253 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+cBcBcBcBcBbbbbbbbbbbbbbbBBBBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+BcBcBcBcBcbbbbbbbbbbbbbbccccbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+bbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbb
+
+--------------------------------------------------------------------------------
+0 pt/round: Team India(P6) "The name the team gives to this strategy"
+0 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-21 pt/round: Team India(P6) "The name the team gives to this strategy"
+-330 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+cbbbBCCCcbbbBBBBBCCCcbbbBBBBBBBBBBBBCCCcbbbBBBBBBBBBBBBBCCCcbbbBBBBBBBBBBBBCCCcb
+BbbbcCCCBbbbcccccCCCBbbbccccccccccccCCCBbbbcccccccccccccCCCBbbbccccccccccccCCCBb
+
+bbBBBBBBBBBBBBBCCCcbbbBBBBBBBBBBBBCCCcbbbBBBBBBBBBBBBBCCCcbb
+bbcccccccccccccCCCBbbbccccccccccccCCCBbbbcccccccccccccCCCBbb
+
+--------------------------------------------------------------------------------
+0 pt/round: Team India(P6) "The name the team gives to this strategy"
+0 pt/round: Okonkwo(P3) "look at history and decide based on it"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: Team India(P6) "The name the team gives to this strategy"
+0 pt/round: 3/4 Asian(P4) "Basic Bois"
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 
---------------------------------------------------------------------------------
--376 pt/round: E3(P3) "Collude but retaliate"
--74 pt/round: E1(P1) "Betray"
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcb
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBb
-
-cbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbcbc
-BbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbBbB
+CCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCC
 
 --------------------------------------------------------------------------------
--201 pt/round: E3(P3) "Collude but retaliate"
--197 pt/round: E2(P2) "Alternate"
-CcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
-CBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
+-245 pt/round: Team India(P6) "The name the team gives to this strategy"
+-245 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+CcBcBcBcBcBbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+CBcBcBcBcBcbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
-BcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBc
-cBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcBcB
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
 
-BcBcBc
-cBcBcB
+--------------------------------------------------------------------------------
+0 pt/round: Team India(P6) "The name the team gives to this strategy"
+0 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCC
+CCC
+
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+Section 3 - Game Data for Team ponyjar
+--------------------------------------------------------------------------------
+-245 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+-99 pt/round:  Team 5 Mr.Turner(P0) "The name the team gives to this strategy"
+cCCCCCCCCCCCCCCCCCCCCCCCcbBCCCCCCCCCCCCCCCCCCCCCCCCCCCcbbcbbcbbcbbcbbcbbcbbcbbcb
+BCCCCCCCCCCCCCCCCCCCCCCCBbcCCCCCCCCCCCCCCCCCCCCCCCCCCCBbbBbbBbbBbbBbbBbbBbbBbbBb
+
+bcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbcbbc
+bBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbBbbB
+
+bbcbbcbbcbbcbbcbbcbbcbbcbbcbb
+bbBbbBbbBbbBbbBbbBbbBbbBbbBbb
+
+--------------------------------------------------------------------------------
+0 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+0 pt/round: C.L.A.S.S.(P1) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-195 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+-173 pt/round: We luv Mostafa(P2) "The name the team gives to this strategy"
+ccccbbcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcB
+BBBBbbBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBc
+
+CcBcbBcBCcBcbBcBCcBcbBcBCcBcbBcB
+CBcBbcBcCBcBbcBcCBcBbcBcCBcBbcBc
+
+--------------------------------------------------------------------------------
+0 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+0 pt/round: Okonkwo(P3) "look at history and decide based on it"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+0 pt/round: 3/4 Asian(P4) "Basic Bois"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+-3 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+0 pt/round: The name the team gives to itself(P5) "The name the team gives to this strategy"
+CcCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+--------------------------------------------------------------------------------
+0 pt/round: ponyjar(P7) "The name the team gives to this strategy"
+0 pt/round: Team India(P6) "The name the team gives to this strategy"
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+
+CCC
+CCC
 
 --------------------------------------------------------------------------------
